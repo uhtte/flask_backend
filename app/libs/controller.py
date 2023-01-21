@@ -2,7 +2,7 @@
 import os
 import sys
 from pathlib import Path
-import filesplit.merge import Merge
+from filesplit.merge import Merge
 from werkzeug.utils import secure_filename
 
 from app.libs.dbmgr import *
