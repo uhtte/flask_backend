@@ -22,27 +22,26 @@ app = create_app(os.getenv('SERVER_MODE') or 'dev')
 for bp in blueprints:
     app.register_blueprint(bp)
 
-@app.route("/")
-def index():
-    return render_template('./index.html')
- 
 logging.getLogger('werkzeug').addHandler(CustomLogger.__call__().fileHandler)
 
 """
 """
+
+
 def main(argv):
-    print(Figlet(font='slant').renderText( 'MMC SERVER '))
+    print(Figlet(font='slant').renderText('MMC SERVER '))
 
     logger.info('service is running!')
     try:
         # ssl_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
         # ssl_context.load_cert_chain(certfile=app.config['SSL_CERTFILE'], keyfile=app.config['SSL_KEYFILE'], password=app.config['SSL_PASSWORD'])
         # app.run(use_reloader=False, threaded=True, host='0.0.0.0', port=7777, ssl_context=ssl_context)
-        app.run(use_reloader=False, threaded=True, host='0.0.0.0', port=7777)
-        #app.run(threaded=True, host=socket.gethostbyname(socket.gethostname()))
+        app.run(use_reloader=False, threaded=True)
+        # app.run(threaded=True, host=socket.gethostbyname(socket.gethostname()))
     except:
         logger.critical(get_callstack())
     logger.info('service is finished!')
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     sys.exit(main(sys.argv))
