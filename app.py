@@ -23,6 +23,10 @@ for bp in blueprints:
 
 logging.getLogger('werkzeug').addHandler(CustomLogger.__call__().fileHandler)
 
+@app.route("/")
+def index():
+    return render_template('./index.html')
+
 """
 """
 def main(argv):
