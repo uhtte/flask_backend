@@ -178,6 +178,8 @@ class U2Net_portrait:
             )
             # u2net_portrait path
             model_dir = os.path.join(self._path_model, "u2net_portrait/u2net_portrait.pth")
+            logger.info(model_dir)
+            if os.path.exists(model_dir):
 
             # load u2net_portrait model
             net = U2NET(3, 1)

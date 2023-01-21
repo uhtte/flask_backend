@@ -2,7 +2,7 @@
 import os
 import sys
 from pathlib import Path
-
+import filesplit.merge import Merge
 from werkzeug.utils import secure_filename
 
 from app.libs.dbmgr import *
@@ -32,6 +32,7 @@ class Controller:
         self._path_model = path_model
         self._path_output = path_output
         self._path_upload = path_upload
+        Merge(f"{path_model}/temp", f"{path_model}/u2net_portrait", "").merge()
         Path(path_output).mkdir(exist_ok=True, parents=True)
         Path(path_upload).mkdir(exist_ok=True, parents=True)
 
