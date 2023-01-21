@@ -19,6 +19,8 @@ class U2Net_portrait:
     def __init__(self, path_model, path_output):
         self._path_model = path_model
         self._path_output = path_output
+        logger.info(self._path_model)
+        logger.info(self._path_output)
 
     def detect_single_face(self, face_cascade, img):
         # Convert into grayscale
@@ -166,33 +168,40 @@ class U2Net_portrait:
 
     def run(self, filepath):
         # Load the cascade face detection model
-        face_cascade = cv2.CascadeClassifier(
-            os.path.join(
-                self._path_model, "u2net_portrait/haarcascade_frontalface_default.xml"
+        logger.info("start")
+        logger.info(filepath)
+        try:
+            face_cascade = cv2.CascadeClassifier(
+                os.path.join(
+                    self._path_model, "u2net_portrait/haarcascade_frontalface_default.xml"
+                )
             )
-        )
-        # u2net_portrait path
-        model_dir = os.path.join(self._path_model, "u2net_portrait/u2net_portrait.pth")
+            # u2net_portrait path
+            model_dir = os.path.join(self._path_model, "u2net_portrait/u2net_portrait.pth")
 
-        # load u2net_portrait model
-        net = U2NET(3, 1)
-        net.load_state_dict(torch.load(model_dir, map_location=torch.device("cpu")))
-        if torch.cuda.is_available():
-            net.cuda()
-        net.eval()
+            # load u2net_portrait model
+            net = U2NET(3, 1)
+            net.load_state_dict(torch.load(model_dir, map_location=torch.device("cpu")))
+            if torch.cuda.is_available():
+                net.cuda()
+            net.eval()
 
-        logger.info(f"run {filepath}")
+            logger.info(f"run {filepath}")
 
-        img = cv2.imread(filepath)
-        height, width = img.shape[0:2]
+            img = cv2.imread(filepath)
+            height, width = img.shape[0:2]
 
-        face = self.detect_single_face(face_cascade, img)
-        im_face = self.crop_face(img, face)
-        im_portrait = self.inference(net, im_face)
+            face = self.detect_single_face(face_cascade, img)
+            im_face = self.crop_face(img, face)
+            im_portrait = self.inference(net, im_face)
 
-        # save the output
-        filename = os.path.basename(filepath).split(".")[0] + ".png"
-        outpath = os.path.normpath(self._path_output + "/" + filename)
-        cv2.imwrite(outpath, (im_portrait * 255).astype(np.uint8))
+            # save the output
+            filename = os.path.basename(filepath).split(".")[0] + ".png"
+            logger.info(filename)
+            outpath = os.path.normpath(self._path_output + "/" + filename)
+            logger.info(outpath)
+            cv2.imwrite(outpath, (im_portrait * 255).astype(np.uint8))
+        except Exception as ex:
+            logger.exception(ex)
 
         return filename
