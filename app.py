@@ -5,6 +5,7 @@ import sys
 # import ssl
 
 from pyfiglet import Figlet
+from flask import render_template
 
 from app import create_app
 from app.routes import blueprints
@@ -21,6 +22,10 @@ app = create_app(os.getenv('SERVER_MODE') or 'dev')
 for bp in blueprints:
     app.register_blueprint(bp)
 
+@app.route("/")
+def index():
+    return render_template('./index.html')
+ 
 logging.getLogger('werkzeug').addHandler(CustomLogger.__call__().fileHandler)
 
 """
