@@ -20,16 +20,17 @@ CONTROLLER = Controller()
 
 def create_app(config_name):
     app = Flask(__name__)
-    app.secret_key = 'random key string'
+    app.secret_key = "random key string"
     app.config.from_object(config_by_name[config_name])
     app.permanent_session_lifetime = timedelta(minutes=5)
 
     CORS(app, resources={r"/*": {"origins": "*"}})
 
     CONTROLLER.init(
-        path_database=app.config['PATH_DATABASE'],
-        path_upload=app.config['PATH_UPLOAD'],
-        path_output=app.config['PATH_OUTPUT'],
-        path_model=app.config['PATH_MODEL'])
+        path_database=app.config["PATH_DATABASE"],
+        path_upload=app.config["PATH_UPLOAD"],
+        path_output=app.config["PATH_OUTPUT"],
+        path_model=app.config["PATH_MODEL"],
+    )
 
     return app

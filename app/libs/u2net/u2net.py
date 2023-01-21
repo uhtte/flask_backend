@@ -8,7 +8,8 @@ class REBNCONV(nn.Module):
         super(REBNCONV, self).__init__()
 
         self.conv_s1 = nn.Conv2d(
-            in_ch, out_ch, 3, padding=1*dirate, dilation=1*dirate)
+            in_ch, out_ch, 3, padding=1 * dirate, dilation=1 * dirate
+        )
         self.bn_s1 = nn.BatchNorm2d(out_ch)
         self.relu_s1 = nn.ReLU(inplace=True)
 
@@ -19,19 +20,19 @@ class REBNCONV(nn.Module):
 
         return xout
 
+
 # upsample tensor 'src' to have the same spatial size with tensor 'tar'
 
 
 def _upsample_like(src, tar):
 
-    src = F.upsample(src, size=tar.shape[2:], mode='bilinear')
+    src = F.upsample(src, size=tar.shape[2:], mode="bilinear")
 
     return src
 
 
 ### RSU-7 ###
 class RSU7(nn.Module):  # UNet07DRES(nn.Module):
-
     def __init__(self, in_ch=3, mid_ch=12, out_ch=3):
         super(RSU7, self).__init__()
 
@@ -56,12 +57,12 @@ class RSU7(nn.Module):  # UNet07DRES(nn.Module):
 
         self.rebnconv7 = REBNCONV(mid_ch, mid_ch, dirate=2)
 
-        self.rebnconv6d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv5d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv4d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv3d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv2d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv1d = REBNCONV(mid_ch*2, out_ch, dirate=1)
+        self.rebnconv6d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv5d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv4d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv3d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv2d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv1d = REBNCONV(mid_ch * 2, out_ch, dirate=1)
 
     def forward(self, x):
 
@@ -106,11 +107,11 @@ class RSU7(nn.Module):  # UNet07DRES(nn.Module):
 
         return hx1d + hxin
 
+
 ### RSU-6 ###
 
 
 class RSU6(nn.Module):  # UNet06DRES(nn.Module):
-
     def __init__(self, in_ch=3, mid_ch=12, out_ch=3):
         super(RSU6, self).__init__()
 
@@ -132,11 +133,11 @@ class RSU6(nn.Module):  # UNet06DRES(nn.Module):
 
         self.rebnconv6 = REBNCONV(mid_ch, mid_ch, dirate=2)
 
-        self.rebnconv5d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv4d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv3d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv2d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv1d = REBNCONV(mid_ch*2, out_ch, dirate=1)
+        self.rebnconv5d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv4d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv3d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv2d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv1d = REBNCONV(mid_ch * 2, out_ch, dirate=1)
 
     def forward(self, x):
 
@@ -176,11 +177,11 @@ class RSU6(nn.Module):  # UNet06DRES(nn.Module):
 
         return hx1d + hxin
 
+
 ### RSU-5 ###
 
 
 class RSU5(nn.Module):  # UNet05DRES(nn.Module):
-
     def __init__(self, in_ch=3, mid_ch=12, out_ch=3):
         super(RSU5, self).__init__()
 
@@ -199,10 +200,10 @@ class RSU5(nn.Module):  # UNet05DRES(nn.Module):
 
         self.rebnconv5 = REBNCONV(mid_ch, mid_ch, dirate=2)
 
-        self.rebnconv4d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv3d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv2d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv1d = REBNCONV(mid_ch*2, out_ch, dirate=1)
+        self.rebnconv4d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv3d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv2d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv1d = REBNCONV(mid_ch * 2, out_ch, dirate=1)
 
     def forward(self, x):
 
@@ -236,11 +237,11 @@ class RSU5(nn.Module):  # UNet05DRES(nn.Module):
 
         return hx1d + hxin
 
+
 ### RSU-4 ###
 
 
 class RSU4(nn.Module):  # UNet04DRES(nn.Module):
-
     def __init__(self, in_ch=3, mid_ch=12, out_ch=3):
         super(RSU4, self).__init__()
 
@@ -256,9 +257,9 @@ class RSU4(nn.Module):  # UNet04DRES(nn.Module):
 
         self.rebnconv4 = REBNCONV(mid_ch, mid_ch, dirate=2)
 
-        self.rebnconv3d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv2d = REBNCONV(mid_ch*2, mid_ch, dirate=1)
-        self.rebnconv1d = REBNCONV(mid_ch*2, out_ch, dirate=1)
+        self.rebnconv3d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv2d = REBNCONV(mid_ch * 2, mid_ch, dirate=1)
+        self.rebnconv1d = REBNCONV(mid_ch * 2, out_ch, dirate=1)
 
     def forward(self, x):
 
@@ -286,11 +287,11 @@ class RSU4(nn.Module):  # UNet04DRES(nn.Module):
 
         return hx1d + hxin
 
+
 ### RSU-4F ###
 
 
 class RSU4F(nn.Module):  # UNet04FRES(nn.Module):
-
     def __init__(self, in_ch=3, mid_ch=12, out_ch=3):
         super(RSU4F, self).__init__()
 
@@ -302,9 +303,9 @@ class RSU4F(nn.Module):  # UNet04FRES(nn.Module):
 
         self.rebnconv4 = REBNCONV(mid_ch, mid_ch, dirate=8)
 
-        self.rebnconv3d = REBNCONV(mid_ch*2, mid_ch, dirate=4)
-        self.rebnconv2d = REBNCONV(mid_ch*2, mid_ch, dirate=2)
-        self.rebnconv1d = REBNCONV(mid_ch*2, out_ch, dirate=1)
+        self.rebnconv3d = REBNCONV(mid_ch * 2, mid_ch, dirate=4)
+        self.rebnconv2d = REBNCONV(mid_ch * 2, mid_ch, dirate=2)
+        self.rebnconv1d = REBNCONV(mid_ch * 2, out_ch, dirate=1)
 
     def forward(self, x):
 
@@ -327,7 +328,6 @@ class RSU4F(nn.Module):  # UNet04FRES(nn.Module):
 
 ##### U^2-Net ####
 class U2NET(nn.Module):
-
     def __init__(self, in_ch=3, out_ch=1):
         super(U2NET, self).__init__()
 
@@ -362,7 +362,7 @@ class U2NET(nn.Module):
         self.side5 = nn.Conv2d(512, out_ch, 3, padding=1)
         self.side6 = nn.Conv2d(512, out_ch, 3, padding=1)
 
-        self.outconv = nn.Conv2d(6*out_ch, out_ch, 1)
+        self.outconv = nn.Conv2d(6 * out_ch, out_ch, 1)
 
     def forward(self, x):
 
@@ -427,13 +427,21 @@ class U2NET(nn.Module):
 
         d0 = self.outconv(torch.cat((d1, d2, d3, d4, d5, d6), 1))
 
-        return F.sigmoid(d0), F.sigmoid(d1), F.sigmoid(d2), F.sigmoid(d3), F.sigmoid(d4), F.sigmoid(d5), F.sigmoid(d6)
+        return (
+            F.sigmoid(d0),
+            F.sigmoid(d1),
+            F.sigmoid(d2),
+            F.sigmoid(d3),
+            F.sigmoid(d4),
+            F.sigmoid(d5),
+            F.sigmoid(d6),
+        )
+
 
 ### U^2-Net small ###
 
 
 class U2NETP(nn.Module):
-
     def __init__(self, in_ch=3, out_ch=1):
         super(U2NETP, self).__init__()
 
@@ -468,7 +476,7 @@ class U2NETP(nn.Module):
         self.side5 = nn.Conv2d(64, out_ch, 3, padding=1)
         self.side6 = nn.Conv2d(64, out_ch, 3, padding=1)
 
-        self.outconv = nn.Conv2d(6*out_ch, out_ch, 1)
+        self.outconv = nn.Conv2d(6 * out_ch, out_ch, 1)
 
     def forward(self, x):
 
@@ -533,4 +541,12 @@ class U2NETP(nn.Module):
 
         d0 = self.outconv(torch.cat((d1, d2, d3, d4, d5, d6), 1))
 
-        return F.sigmoid(d0), F.sigmoid(d1), F.sigmoid(d2), F.sigmoid(d3), F.sigmoid(d4), F.sigmoid(d5), F.sigmoid(d6)
+        return (
+            F.sigmoid(d0),
+            F.sigmoid(d1),
+            F.sigmoid(d2),
+            F.sigmoid(d3),
+            F.sigmoid(d4),
+            F.sigmoid(d5),
+            F.sigmoid(d6),
+        )
