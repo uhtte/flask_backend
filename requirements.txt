@@ -16,3 +16,4 @@ tinydb
 torch
 pillow
 opencv-python
+filesplit
