@@ -1,20 +1,19 @@
-#-*- coding:utf-8 -*-
-__author__      = "yongil80.cho@samsung.com"
-__copyright__   = "Copyright 2022, Samsung Electronics"
-
-__appname__     = "MMC-SERVER"
-__version__     = "0.0.0"
-
-import sys
-from datetime import timedelta
-
-from flask import Flask
-from flask_cors import CORS
-
-from app.config import config_by_name
+# -*- coding:utf-8 -*-
 from app.libs.controller import Controller
+from app.config import config_by_name
+from flask_cors import CORS
+from flask import Flask
+from datetime import timedelta
+import sys
+__author__ = "yongil80.cho@samsung.com"
+__copyright__ = "Copyright 2022, Samsung Electronics"
+
+__appname__ = "MMC-SERVER"
+__version__ = "0.0.0"
+
 
 CONTROLLER = Controller()
+
 
 def create_app(config_name):
     app = Flask(__name__)

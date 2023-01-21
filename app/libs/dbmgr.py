@@ -1,17 +1,18 @@
-#-*- coding:utf-8 -*-
-__author__      = "yongil80.cho@samsung.com"
-__copyright__   = "Copyright 2022, Samsung Electronics"
-
-import os
-import sys
-import threading
+# -*- coding:utf-8 -*-
+from utils.logger import *
+from utils.helper import *
 from tinydb import TinyDB, Query
+import threading
+import sys
+import os
+__author__ = "yongil80.cho@samsung.com"
+__copyright__ = "Copyright 2022, Samsung Electronics"
+
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from utils.helper import *
-from utils.logger import *
 logger = CustomLogger.__call__().logger
+
 
 class DBManager():
     def __init__(self, path_db):
@@ -34,7 +35,7 @@ class DBManager():
         with self._lock:
             collection = self._records_collection()
             collection.truncate()
-    
+
     def insert_record(self, record):
         with self._lock:
             collection = self._records_collection()
@@ -54,4 +55,3 @@ class DBManager():
             else:
                 items = collection.search(query)
         return items
-    

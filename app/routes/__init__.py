@@ -1,9 +1,9 @@
-#-*- coding:utf-8 -*-
-__author__      = "yongil80.cho@samsung.com"
-__copyright__   = "Copyright 2022, Samsung Electronics"
-
-from . import api_image
+# -*- coding:utf-8 -*-
 from . import api_status
+from . import api_image
+__author__ = "yongil80.cho@samsung.com"
+__copyright__ = "Copyright 2022, Samsung Electronics"
+
 
 __all__ = ["blueprints"]
 

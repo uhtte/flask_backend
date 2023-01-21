@@ -24,7 +24,8 @@ class REBNCONV(nn.Module):
     def __init__(self, in_ch=3, out_ch=3, dilate=1):
         super(REBNCONV, self).__init__()
 
-        self.conv_s1 = nn.Conv2d(in_ch, out_ch, 3, padding=1 * dilate, dilation=1 * dilate)
+        self.conv_s1 = nn.Conv2d(
+            in_ch, out_ch, 3, padding=1 * dilate, dilation=1 * dilate)
         self.bn_s1 = nn.BatchNorm2d(out_ch)
         self.relu_s1 = nn.ReLU(inplace=True)
 
@@ -62,18 +63,22 @@ class RSU(nn.Module):
 
     def _make_layers(self, height, in_ch, mid_ch, out_ch, dilated=False):
         self.add_module('rebnconvin', REBNCONV(in_ch, out_ch))
-        self.add_module('downsample', nn.MaxPool2d(2, stride=2, ceil_mode=True))
+        self.add_module('downsample', nn.MaxPool2d(
+            2, stride=2, ceil_mode=True))
 
         self.add_module(f'rebnconv1', REBNCONV(out_ch, mid_ch))
         self.add_module(f'rebnconv1d', REBNCONV(mid_ch * 2, out_ch))
 
         for i in range(2, height):
             dilate = 1 if not dilated else 2 ** (i - 1)
-            self.add_module(f'rebnconv{i}', REBNCONV(mid_ch, mid_ch, dilate=dilate))
-            self.add_module(f'rebnconv{i}d', REBNCONV(mid_ch * 2, mid_ch, dilate=dilate))
+            self.add_module(f'rebnconv{i}', REBNCONV(
+                mid_ch, mid_ch, dilate=dilate))
+            self.add_module(f'rebnconv{i}d', REBNCONV(
+                mid_ch * 2, mid_ch, dilate=dilate))
 
         dilate = 2 if not dilated else 2 ** (height - 1)
-        self.add_module(f'rebnconv{height}', REBNCONV(mid_ch, mid_ch, dilate=dilate))
+        self.add_module(f'rebnconv{height}', REBNCONV(
+            mid_ch, mid_ch, dilate=dilate))
 
 
 class U2NET(nn.Module):
@@ -119,15 +124,18 @@ class U2NET(nn.Module):
 
     def _make_layers(self, cfgs):
         self.height = int((len(cfgs) + 1) / 2)
-        self.add_module('downsample', nn.MaxPool2d(2, stride=2, ceil_mode=True))
+        self.add_module('downsample', nn.MaxPool2d(
+            2, stride=2, ceil_mode=True))
         for k, v in cfgs.items():
             # build rsu block
             self.add_module(k, RSU(v[0], *v[1]))
             if v[2] > 0:
                 # build side layer
-                self.add_module(f'side{v[0][-1]}', nn.Conv2d(v[2], self.out_ch, 3, padding=1))
+                self.add_module(
+                    f'side{v[0][-1]}', nn.Conv2d(v[2], self.out_ch, 3, padding=1))
         # build fuse layer
-        self.add_module('outconv', nn.Conv2d(int(self.height * self.out_ch), self.out_ch, 1))
+        self.add_module('outconv', nn.Conv2d(
+            int(self.height * self.out_ch), self.out_ch, 1))
 
 
 def U2NET_full():
