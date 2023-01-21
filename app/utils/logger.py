@@ -48,7 +48,7 @@ class CustomLogger(object, metaclass=SingletoneType):
             style='%'
         )
         self._fileHandler = handlers.TimedRotatingFileHandler(filename=os.path.join(dirname, 'app.log'), when='midnight', interval=1, encoding='utf-8')
-	self._fileHandler.suffix = '%Y-%m-%d_%H-%M-%S'
+        self._fileHandler.suffix = '%Y-%m-%d_%H-%M-%S'
         self._fileHandler.setFormatter(formatter_file)
 
         self._streamHandler = logging.StreamHandler(sys.stdout)
