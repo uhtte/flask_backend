@@ -1,14 +1,15 @@
-from libs.u2net import *
 import os
 import sys
-
-import cv2
-import torch
-from torch.autograd import Variable
-import numpy as np
 from glob import glob
 
-from utils.logger import *
+import cv2
+import numpy as np
+import torch
+from torch.autograd import Variable
+
+from app.libs.u2net import *
+from app.utils.logger import *
+
 logger = CustomLogger.__call__().logger
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))

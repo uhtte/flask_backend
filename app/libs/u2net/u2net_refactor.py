@@ -1,7 +1,7 @@
+import math
+
 import torch
 import torch.nn as nn
-
-import math
 
 __all__ = ['U2NET_full', 'U2NET_lite']
 

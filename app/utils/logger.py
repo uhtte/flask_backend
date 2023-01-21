@@ -1,11 +1,13 @@
 # -*- coding:utf-8 -*-
-from colorlog import ColoredFormatter
-from logging import handlers
-import logging
 import datetime
-import time
-import sys
+import logging
 import os
+import sys
+import time
+from logging import handlers
+
+from colorlog import ColoredFormatter
+
 __author__ = "yongil80.cho@samsung.com"
 __copyright__ = "Copyright 2022, Samsung Electronics"
 

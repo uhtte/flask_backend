@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
-import traceback
 import os
+import traceback
+
 __author__ = "yongil80.cho@samsung.com"
 __copyright__ = "Copyright 2022, Samsung Electronics"
 

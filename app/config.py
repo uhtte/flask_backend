@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
-import sys
 import os
+import sys
+
 __author__ = "yongil80.cho@samsung.com"
 __copyright__ = "Copyright 2022, Samsung Electronics"
 

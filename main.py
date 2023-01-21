@@ -2,15 +2,18 @@ __author__ = "yongil80.cho@samsung.com"
 __copyright__ = "Copyright 2022, Samsung Electronics"
 
 import sys
-# import ssl
 
-from pyfiglet import Figlet
 from flask import render_template
+from pyfiglet import Figlet
 
 from app import create_app
 from app.routes import blueprints
 from app.utils.helper import *
 from app.utils.logger import *
+
+# import ssl
+
+
 logger = CustomLogger.__call__().logger
 
 """

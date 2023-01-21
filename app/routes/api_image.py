@@ -1,11 +1,15 @@
 # -*- coding:utf-8 -*-
-from app.utils.logger import *
-from app.utils.helper import *
-from app import CONTROLLER
-from flask import render_template, make_response, jsonify, session, request, Blueprint, send_file
-from PIL import Image
 import base64
 import io
+
+from flask import (Blueprint, jsonify, make_response, render_template, request,
+                   send_file, session)
+from PIL import Image
+
+from app import CONTROLLER
+from app.utils.helper import *
+from app.utils.logger import *
+
 __author__ = "yongil80.cho@samsung.com"
 __copyright__ = "Copyright 2022, Samsung Electronics"
 

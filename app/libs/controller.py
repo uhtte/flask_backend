@@ -1,11 +1,14 @@
 # -*- coding:utf-8 -*-
-from utils.logger import *
-from utils.helper import *
-from libs.dbmgr import *
-from libs.u2net_portrait import *
-from werkzeug.utils import secure_filename
-import sys
 import os
+import sys
+
+from werkzeug.utils import secure_filename
+
+from app.libs.dbmgr import *
+from app.libs.u2net_portrait import *
+from app.utils.helper import *
+from app.utils.logger import *
+
 __author__ = "yongil80.cho@samsung.com"
 __copyright__ = "Copyright 2022, Samsung Electronics"
 

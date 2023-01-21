@@ -1,8 +1,11 @@
 # -*- coding:utf-8 -*-
-from app.utils.logger import *
-from app.utils.helper import *
+from flask import (Blueprint, jsonify, make_response, render_template, request,
+                   session)
+
 from app import CONTROLLER
-from flask import render_template, make_response, jsonify, session, request, Blueprint
+from app.utils.helper import *
+from app.utils.logger import *
+
 __author__ = "yongil80.cho@samsung.com"
 __copyright__ = "Copyright 2022, Samsung Electronics"
 
