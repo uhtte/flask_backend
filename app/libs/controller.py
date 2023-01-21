@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import os
 import sys
+from pathlib import Path
 
 from werkzeug.utils import secure_filename
 
@@ -31,9 +32,8 @@ class Controller:
         self._path_model = path_model
         self._path_output = path_output
         self._path_upload = path_upload
-
-        if not os.path.exists(self._path_output):
-            os.makedirs(self._path_output)
+        Path(path_output).mkdir(exist_ok=True, parents=True)
+        Path(path_upload).mkdir(exist_ok=True, parents=True)
 
     def start_tests(self):
         return
