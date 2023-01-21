@@ -32,7 +32,7 @@ class Controller:
         self._path_model = path_model
         self._path_output = path_output
         self._path_upload = path_upload
-        Merge(f"{path_model}/temp", f"{path_model}/u2net_portrait", "").merge()
+        Merge(f"{path_model}/temp", f"{path_model}/u2net_portrait", "u2net_portrait.pth").merge()
         Path(path_output).mkdir(exist_ok=True, parents=True)
         Path(path_upload).mkdir(exist_ok=True, parents=True)
 
