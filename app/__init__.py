@@ -22,7 +22,7 @@ def create_app(config_name):
     app = Flask(__name__)
     app.secret_key = "random key string"
     app.config.from_object(config_by_name[config_name])
-    app.permanent_session_lifetime = timedelta(minutes=5)
+    app.permanent_session_lifetime = timedelta(minutes=30)
 
     CORS(app, resources={r"/*": {"origins": "*"}})
 
