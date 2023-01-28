@@ -182,12 +182,13 @@ class U2Net_portrait:
             
             # load u2net_portrait model
             net = U2NET(3, 1)
-            logger.info(net)
             net.load_state_dict(torch.load(model_dir, map_location=torch.device("cpu")))
+            logger.info("loaded")
             if torch.cuda.is_available():
                net.cuda()
-            logger.info(net)
+            logger.info("pre eval")
             net.eval()
+            logger.info("eval")
 
             logger.info(f"run {filepath}")
 

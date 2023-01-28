@@ -20,7 +20,7 @@ logger = CustomLogger.__call__().logger
  ENVIRONMENT VARIABLE
  - KPIBOT_MODE: 'dev' or 'prod'
 """
-app = create_app(os.getenv("SERVER_MODE") or "dev")
+app = create_app(os.getenv("SERVER_MODE") or "prod")
 # set routers
 for bp in blueprints:
     app.register_blueprint(bp)
